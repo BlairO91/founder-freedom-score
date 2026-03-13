@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-off-white text-charcoal font-inter;
+  }
+
+  ::selection {
+    @apply bg-gold/20 text-navy;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-8 py-4
+           bg-gold text-navy font-inter font-semibold text-base
+           rounded-lg transition-all duration-200
+           hover:bg-light-gold hover:shadow-sm
+           focus:outline-none focus:ring-2 focus:ring-gold/50 focus:ring-offset-2 focus:ring-offset-off-white
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3
+           bg-transparent text-navy font-inter font-medium text-sm
+           border border-navy/20 rounded-lg transition-all duration-200
+           hover:border-navy/40 hover:bg-navy/5
+           focus:outline-none focus:ring-2 focus:ring-navy/20 focus:ring-offset-2;
+  }
+
+  .card-surface {
+    @apply bg-white rounded-xl border border-black/[0.06];
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
