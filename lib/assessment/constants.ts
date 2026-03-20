@@ -28,6 +28,6 @@ export const STORAGE_KEYS = {
 
 export const ENV = {
   SHEETS_WEBHOOK_URL: process.env.NEXT_PUBLIC_SHEETS_WEBHOOK_URL || '',
-  CALENDLY_URL: process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com',
+  CALENDLY_URL: process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/aaron-thrivingfounder/30min',
   GA_ID: process.env.NEXT_PUBLIC_GA_ID || '',
 } as const;

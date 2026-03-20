@@ -20,6 +20,7 @@ export default function ResultsPage() {
   const [result, setResult] = useState<AssessmentResult | null>(null);
   const [loading, setLoading] = useState(true);
   const [showCalendly, setShowCalendly] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const data = loadResult(resultId);
@@ -40,14 +41,38 @@ export default function ResultsPage() {
     setShowCalendly(true);
   }
 
-  function handleShare() {
+  async function handleShare() {
     const url = window.location.href;
     if (navigator.share) {
-      navigator.share({ title: 'My Founder Freedom Score™', url });
+      try {
+        await navigator.share({ title: 'My Founder Freedom Score™', url });
+      } catch {
+        // User cancelled or share failed — fall through to clipboard
+        await copyToClipboard(url);
+      }
     } else {
-      navigator.clipboard.writeText(url);
+      await copyToClipboard(url);
     }
     track('results_shared', { resultId });
+  }
+
+  async function copyToClipboard(url: string) {
+    try {
+      await navigator.clipboard.writeText(url);
+    } catch {
+      // Clipboard API unavailable — use legacy execCommand fallback
+      const textarea = document.createElement('textarea');
+      textarea.value = url;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+    }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   }
 
   if (loading) {
@@ -157,23 +182,57 @@ export default function ResultsPage() {
             </p>
           </motion.div>
 
-          {/* Strategy Call CTA */}
+          {/* Tier-based CTA */}
           <motion.div
             className="bg-navy rounded-xl p-8 md:p-10 text-center mb-6"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
           >
-            <h3 className="font-inter font-semibold text-lg md:text-xl text-white mb-3">
-              Remove your #1 barrier — with a clear plan.
-            </h3>
-            <p className="font-inter text-sm text-white/60 leading-relaxed max-w-md mx-auto mb-6">
-              In a 30-minute strategy call, we&apos;ll map out exactly how to
-              remove this barrier and move toward your freedom-based business.
-            </p>
-            <button onClick={handleBookCall} className="btn-primary">
-              Book My Strategy Call
-            </button>
+            {result.tier === 'Freedom-Ready' && (
+              <>
+                <h3 className="font-inter font-semibold text-lg md:text-xl text-white mb-3">
+                  Remove your #1 barrier — with a clear plan.
+                </h3>
+                <p className="font-inter text-sm text-white/60 leading-relaxed max-w-md mx-auto mb-6">
+                  In a 30-minute strategy call, we&apos;ll map out exactly how to
+                  remove this barrier and move toward your freedom-based business.
+                </p>
+                <button onClick={handleBookCall} className="btn-primary">
+                  Book My Strategy Call
+                </button>
+              </>
+            )}
+
+            {result.tier === 'Foundation-Builder' && (
+              <>
+                <h3 className="font-inter font-semibold text-lg md:text-xl text-white mb-3">
+                  Your Next Step Is Clarity
+                </h3>
+                <p className="font-inter text-sm text-white/60 leading-relaxed max-w-md mx-auto mb-6">
+                  Let&apos;s get on a call to map out what needs to be in place
+                  before you launch.
+                </p>
+                <button onClick={handleBookCall} className="btn-primary">
+                  Book a Foundation Call
+                </button>
+              </>
+            )}
+
+            {result.tier === 'Future Founder' && (
+              <>
+                <h3 className="font-inter font-semibold text-lg md:text-xl text-white mb-3">
+                  You&apos;re Not Ready to Book Yet — And That&apos;s Okay
+                </h3>
+                <p className="font-inter text-sm text-white/60 leading-relaxed max-w-md mx-auto mb-6">
+                  We&apos;ve put together a free resource to help you get to the
+                  starting line. No pressure, no pitch.
+                </p>
+                <a href="#" className="btn-primary inline-block">
+                  Get the Free Starter Guide
+                </a>
+              </>
+            )}
           </motion.div>
 
           {/* Summary Details */}
@@ -186,27 +245,40 @@ export default function ResultsPage() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.9 }}
           >
-            <button
-              onClick={handleShare}
-              className="btn-secondary text-xs"
-            >
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                className="mr-2"
+            <div className="relative inline-block">
+              <button
+                onClick={handleShare}
+                className="btn-secondary text-xs"
               >
-                <path
-                  d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              Share Results
-            </button>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  className="mr-2"
+                >
+                  <path
+                    d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                Share Results
+              </button>
+              {copied && (
+                <motion.span
+                  className="absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap bg-navy text-white text-xs font-inter font-medium px-3 py-1.5 rounded-lg shadow-md pointer-events-none"
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 4 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  Link copied!
+                </motion.span>
+              )}
+            </div>
           </motion.div>
         </div>
       </AssessmentShell>

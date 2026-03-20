@@ -40,13 +40,13 @@ export const cashflowQuestions: Question[] = [
     foundation: 'cashflow',
     tag: 'CASHFLOW',
     title: 'Financial Decision-Making',
-    stem: 'You need to invest $5,000 in your business right now — for coaching, equipment, branding, or a key hire. Your gut reaction is...',
+    stem: 'You need to invest $25,000 in your business right now — for coaching, equipment, branding, or a key hire. Your gut reaction is...',
     options: [
       { key: 'A', text: 'Pure panic — that amount of money feels impossible right now', score: 1 },
-      { key: 'B', text: 'Stress — you could technically do it, but it would mean sacrificing something important', score: 2 },
-      { key: 'C', text: 'Hesitation — you could afford it, but you\'re not sure it\'s the right investment', score: 3 },
+      { key: 'B', text: 'Stress — you could technically pull it together, but it would mean a serious sacrifice', score: 2 },
+      { key: 'C', text: 'Hesitation — you have the funds available, but you\'re not sure it\'s the right investment', score: 3 },
       { key: 'D', text: 'Calculated consideration — you evaluate the ROI and make a decision based on strategy, not fear', score: 4 },
-      { key: 'E', text: 'Confidence — you\'ve already budgeted for business investments and this fits within your plan', score: 5 },
+      { key: 'E', text: 'Confidence — you\'ve already set aside capital for business investments and this fits within your plan', score: 5 },
     ],
   },
 ];

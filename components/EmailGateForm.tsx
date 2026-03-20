@@ -126,6 +126,13 @@ export default function EmailGateForm({ onSubmit }: EmailGateFormProps) {
             />
           </svg>
         </button>
+        <p className="mt-3 text-xs font-inter text-navy/40 text-center">
+          By continuing, you agree to our{' '}
+          <a href="/privacy" className="underline hover:text-navy/60 transition-colors">
+            Privacy Policy
+          </a>
+          .
+        </p>
       </div>
     </motion.form>
   );
