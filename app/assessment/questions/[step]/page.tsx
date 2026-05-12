@@ -88,9 +88,50 @@ export default function QuestionPage() {
         totalScore: result.scoring.totalPercent,
       });
 
-      // Non-blocking submission
+      // Non-blocking Google Sheets submission
       submitResult(result).catch(() => {});
 
+      // ON Platform webhook — build payload and POST through server proxy
+      const params = new URLSearchParams(window.location.search);
+      const metadata: Record<string, string> = {};
+      for (const key of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']) {
+        const val = params.get(key);
+        if (val) metadata[key] = val;
+      }
+
+      const webhookPayload = {
+        email: result.user.email,
+        name: result.user.firstName || result.user.email,
+        scores: result.scoring.foundations.reduce(
+          (acc, f) => ({ ...acc, [f.foundation]: f.percent }),
+          {} as Record<string, number>
+        ),
+        responses: Object.entries(result.answers).map(([stepNum, answerKey]) => ({
+          step: Number(stepNum),
+          answer: answerKey,
+        })),
+        metadata,
+      };
+
+      try {
+        const res = await fetch('/api/ffs-webhook', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(webhookPayload),
+        });
+
+        const data = await res.json();
+
+        if (res.ok && (data.result_url || data.result_token)) {
+          const target = data.result_url || `https://founderon.lovable.app/prospect/${data.result_token}`;
+          window.location.href = target;
+          return;
+        }
+      } catch (err) {
+        console.error('ON Platform webhook failed:', err);
+      }
+
+      // Fallback: show FFS results page if webhook fails
       router.push(`/assessment/complete?id=${result.resultId}`);
     } else {
       setDirection(1);
