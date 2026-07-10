@@ -27,7 +27,7 @@ export default function AssessmentIntro() {
         <h1 className="font-playfair text-4xl md:text-5xl font-bold text-navy leading-tight mb-6">
           Founder Freedom
           <br />
-          Score<span className="text-gold">™</span>
+          Pattern<span className="text-gold">™</span>
         </h1>
 
         <p className="font-inter text-lg text-charcoal/70 leading-relaxed max-w-md mx-auto mb-4">

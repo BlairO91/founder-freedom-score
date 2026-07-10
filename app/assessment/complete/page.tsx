@@ -49,7 +49,7 @@ function CompleteContent() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
-        Your Founder Freedom Score™ is ready.
+        Your Founder Freedom Pattern™ is ready.
       </motion.h1>
 
       <motion.p

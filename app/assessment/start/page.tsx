@@ -38,7 +38,7 @@ export default function AssessmentStart() {
             Let&apos;s find out where you stand.
           </h1>
           <p className="font-inter text-base text-charcoal/60 leading-relaxed max-w-md mx-auto">
-            Enter your details below. Your personalized Founder Freedom Score™
+            Enter your details below. Your personalized Founder Freedom Pattern™
             and custom roadmap will be delivered to your inbox.
           </p>
         </div>

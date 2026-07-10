@@ -1,4 +1,4 @@
-# Founder Freedom Score™
+# Founder Freedom Pattern™
 
 A premium strategic diagnostic assessment for mid-career professionals considering the transition from corporate life to entrepreneurship. Built for **Thriving Founder™**.
 

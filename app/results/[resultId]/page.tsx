@@ -45,7 +45,7 @@ export default function ResultsPage() {
     const url = window.location.href;
     if (navigator.share) {
       try {
-        await navigator.share({ title: 'My Founder Freedom Score™', url });
+        await navigator.share({ title: 'My Founder Freedom Pattern™', url });
       } catch {
         // User cancelled or share failed — fall through to clipboard
         await copyToClipboard(url);
@@ -133,7 +133,7 @@ export default function ResultsPage() {
               {result.user.firstName}&apos;s
             </p>
             <h1 className="font-playfair text-3xl md:text-4xl font-bold text-navy">
-              Founder Freedom Score<span className="text-gold">™</span>
+              Founder Freedom Pattern<span className="text-gold">™</span>
             </h1>
           </motion.div>
 

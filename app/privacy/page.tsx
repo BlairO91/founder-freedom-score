@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Founder Freedom Score™',
-  description: 'Privacy policy for the Founder Freedom Score™ assessment.',
+  title: 'Privacy Policy | Founder Freedom Pattern™',
+  description: 'Privacy policy for the Founder Freedom Pattern™ assessment.',
 };
 
 export default function PrivacyPage() {
@@ -42,7 +42,7 @@ export default function PrivacyPage() {
               What We Collect
             </h2>
             <p className="text-sm">
-              When you take the Founder Freedom Score™ assessment, we collect your first
+              When you take the Founder Freedom Pattern™ assessment, we collect your first
               name and email address. We also collect your assessment responses to
               generate your personalized score and report.
             </p>

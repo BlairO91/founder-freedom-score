@@ -15,7 +15,7 @@ import type { AssessmentResult } from '../types';
  *   await resend.emails.send({
  *     from: 'Thriving Founder <results@thrivingfounder.com>',
  *     to: result.user.email,
- *     subject: `${result.user.firstName}, your Founder Freedom Score™ report`,
+ *     subject: `${result.user.firstName}, your Founder Freedom Pattern™ report`,
  *     html: renderEmailTemplate(result),
  *   });
  *

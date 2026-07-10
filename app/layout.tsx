@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Founder Freedom Score™ | Thriving Founder',
+  title: 'Founder Freedom Pattern™ | Thriving Founder',
   description:
     'Discover your readiness to transition from corporate life to entrepreneurship. A strategic diagnostic across the 4 Foundations: Clarity, Capacity, Cashflow, and Confidence.',
   openGraph: {
-    title: 'Founder Freedom Score™ | Thriving Founder',
+    title: 'Founder Freedom Pattern™ | Thriving Founder',
     description:
       'Discover your readiness to transition from corporate life to entrepreneurship.',
     type: 'website',
