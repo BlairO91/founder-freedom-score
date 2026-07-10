@@ -106,7 +106,7 @@ export default function ResultsPage() {
           </h2>
           <p className="font-inter text-sm text-charcoal/50 mb-8 max-w-sm mx-auto">
             This result may have been created on another device, or the link may
-            be invalid. Take the assessment to get your personalized score.
+            be invalid. Take the assessment to get your personalized pattern.
           </p>
           <button
             onClick={() => router.push('/assessment')}

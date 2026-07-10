@@ -71,7 +71,7 @@ function CompleteContent() {
           onClick={() => router.push(`/results/${resultId}`)}
           className="btn-primary text-base"
         >
-          View My Score
+          View My Pattern
           <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className="ml-2">
             <path
               d="M3 8h10m0 0L9 4m4 4L9 12"
