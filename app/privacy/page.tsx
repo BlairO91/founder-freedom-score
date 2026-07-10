@@ -44,7 +44,7 @@ export default function PrivacyPage() {
             <p className="text-sm">
               When you take the Founder Freedom Pattern™ assessment, we collect your first
               name and email address. We also collect your assessment responses to
-              generate your personalized score and report.
+              generate your personalized pattern and report.
             </p>
           </section>
 
